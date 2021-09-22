@@ -25,7 +25,11 @@ describe Cat do
   context 'when cat has name and breed, but no color' do
     # https://relishapp.com/rspec/rspec-expectations/v/3-9/docs/built-in-matchers/have-attributes-matcher
     it 'has name, breed & color attributes' do
-      expect(oscar).to have_attributes(name: 'Oscar', breed: 'Maine Coon', color: nil)
+      expect(oscar).to have_attributes(
+        name: 'Oscar',
+        breed: 'Maine Coon',
+        color: nil
+      )
     end
   end
 end
@@ -35,17 +39,21 @@ end
 
 describe Cat do
   # Create a subject with your choice of cat name and optional breed/color.
+  subject(:fluffy) { described_class.new('fluffy', 'tabby') }
 
   # Write a test using the second shared_example to test that cat responds to
   # talk ('meow').
-  context '' do
+  context 'when Cat has method names shared with other classes' do
+    include_examples 'shared method name'
   end
 
   # remove the 'x' before running this test
-  xit 'is not hungry' do
+  it 'is not hungry' do
+    expect(fluffy).to_not be_hungry
   end
 
   # remove the 'x' before running this test
-  xit 'is hiding' do
+  it 'is hiding' do
+    expect(fluffy).to be_hiding
   end
 end
