@@ -174,9 +174,7 @@ describe FindNumber do
     context 'when the guess is less than the answer' do
       subject(:low_guess_game) { described_class.new(0, 9, number_range, 4) }
 
-      before do
-        low_guess_game.update_range
-      end
+      before { low_guess_game.update_range }
 
       it 'updates min to 5' do
         minimum = low_guess_game.min
@@ -192,9 +190,7 @@ describe FindNumber do
     context 'when the guess is more than the answer' do
       subject(:high_guess_game) { described_class.new(0, 9, number_range, 9) }
 
-      before do
-        high_guess_game.update_range
-      end
+      before { high_guess_game.update_range }
 
       it 'does not update min' do
         minimum = high_guess_game.min
@@ -221,9 +217,7 @@ describe FindNumber do
     context 'when the guess is 7, with min=5 and max=8' do
       subject(:game_range) { described_class.new(5, 8, number_range, 7) }
 
-      before do
-        game_range.update_range
-      end
+      before { game_range.update_range }
 
       it 'updates min to the same value as max' do
         minimum = game_range.min
