@@ -113,7 +113,8 @@ describe BinaryGame do
       it 'stops loop and does not display error message' do
         min = game_input.instance_variable_get(:@minimum)
         max = game_input.instance_variable_get(:@maximum)
-        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        error_message =
+          "Input error! Please enter a number between #{min} or #{max}."
         expect(game_input).not_to receive(:puts).with(error_message)
         game_input.player_input(min, max)
       end
@@ -138,7 +139,8 @@ describe BinaryGame do
       it 'completes loop and displays error message once' do
         min = game_input.instance_variable_get(:@minimum)
         max = game_input.instance_variable_get(:@maximum)
-        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        error_message =
+          "Input error! Please enter a number between #{min} or #{max}."
         expect(game_input).to receive(:puts).with(error_message).once
         game_input.player_input(min, max)
       end
@@ -149,13 +151,18 @@ describe BinaryGame do
         letter = 'q'
         symbol = '@'
         valid_input = '3'
-        allow(game_input).to receive(:gets).and_return(letter, symbol, valid_input)
+        allow(game_input).to receive(:gets).and_return(
+          letter,
+          symbol,
+          valid_input
+        )
       end
 
       it 'completes loop and displays error message twice' do
         min = game_input.instance_variable_get(:@minimum)
         max = game_input.instance_variable_get(:@maximum)
-        error_message = "Input error! Please enter a number between #{min} or #{max}."
+        error_message =
+          "Input error! Please enter a number between #{min} or #{max}."
         expect(game_input).to receive(:puts).with(error_message).twice
         game_input.player_input(min, max)
       end
@@ -244,7 +251,9 @@ describe BinaryGame do
       before do
         allow(game_update).to receive(:puts)
         new_number = 76
-        allow(game_update).to receive(:player_input).with(1, 100).and_return(new_number)
+        allow(game_update).to receive(:player_input)
+          .with(1, 100)
+          .and_return(new_number)
       end
 
       it 'sends update_value to random_number' do
@@ -322,18 +331,26 @@ describe BinaryGame do
       end
 
       it 'calls display_turn_order one time' do
-        expect(game_display).to receive(:display_turn_order).with(search_display).once
+        expect(game_display).to receive(:display_turn_order)
+          .with(search_display)
+          .once
         game_display.display_binary_search(search_display)
       end
     end
 
     context 'when game_over? is false twice' do
       before do
-        allow(search_display).to receive(:game_over?).and_return(false, false, true)
+        allow(search_display).to receive(:game_over?).and_return(
+          false,
+          false,
+          true
+        )
       end
 
       it 'calls display_turn_order two times' do
-        expect(game_display).to receive(:display_turn_order).with(search_display).twice
+        expect(game_display).to receive(:display_turn_order)
+          .with(search_display)
+          .twice
         game_display.display_binary_search(search_display)
       end
     end
@@ -343,11 +360,21 @@ describe BinaryGame do
     # Write a test for the following context.
     context 'when game_over? is false five times' do
       before do
-        allow(search_display).to receive(:game_over?).and_return(false, false, false, false, false, true)
+        allow(search_display).to receive(:game_over?).and_return(
+          false,
+          false,
+          false,
+          false,
+          false,
+          true
+        )
       end
 
       it 'calls display_turn_order five times' do
-        expect(game_display).to receive(:display_turn_order).with(search_display).exactly(5).times
+        expect(game_display).to receive(:display_turn_order)
+          .with(search_display)
+          .exactly(5)
+          .times
         game_display.display_binary_search(search_display)
       end
     end
@@ -373,7 +400,9 @@ describe BinaryGame do
 
     # Command Method -> Test the change in the observable state
     it 'increases guess_count by one' do
-      expect { game_turn.display_turn_order(binary_search_turn) }.to change { game_turn.instance_variable_get(:@guess_count) }.by(1)
+      expect { game_turn.display_turn_order(binary_search_turn) }.to change {
+        game_turn.instance_variable_get(:@guess_count)
+      }.by(1)
     end
 
     # Method with Outgoing Command -> Test that a message is sent
