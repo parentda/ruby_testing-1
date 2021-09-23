@@ -95,7 +95,7 @@ describe BinarySearch do
     end
 
     context 'when guess and random_number are not equal' do
-      let(:mid_number) { double('random_number', value: 5) }
+      let(:mid_number) { instance_double(RandomNumber, value: 5) }
       subject(:mid_game) { described_class.new(0, 9, mid_number, 4) }
 
       it 'is not game over' do
@@ -105,14 +105,12 @@ describe BinarySearch do
   end
 
   describe '#update_range' do
-    let(:range_number) { double('random_number', value: 8) }
+    let(:range_number) { instance_double(RandomNumber, value: 8) }
 
     context 'when the guess is less than the answer' do
       subject(:low_guess_game) { described_class.new(0, 9, range_number, 4) }
 
-      before do
-        low_guess_game.update_range
-      end
+      before { low_guess_game.update_range }
 
       it 'updates min' do
         minimum = low_guess_game.min
@@ -128,9 +126,7 @@ describe BinarySearch do
     context 'when the guess is more than the answer' do
       subject(:high_guess_game) { described_class.new(0, 9, range_number, 9) }
 
-      before do
-        high_guess_game.update_range
-      end
+      before { high_guess_game.update_range }
 
       it 'does not update min' do
         minimum = high_guess_game.min
@@ -146,9 +142,7 @@ describe BinarySearch do
     context 'when the guess is 7, with min=5 and max=8' do
       subject(:eight_game) { described_class.new(5, 8, range_number, 7) }
 
-      before do
-        eight_game.update_range
-      end
+      before { eight_game.update_range }
 
       it 'updates min to the same value as max' do
         minimum = eight_game.min
