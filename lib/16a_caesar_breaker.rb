@@ -18,8 +18,6 @@ class CaesarBreaker
   end
 
   def create_decrypted_messages
-    26.times do |shift|
-      @decrypted_messages << @translator.translate(shift)
-    end
+    26.times { |shift| @decrypted_messages << @translator.translate(shift) }
   end
 end
